@@ -138,10 +138,6 @@ app.post('/login', (req, res) => {
     const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
 
     // Log to debug input data
-    console.log('Username:', username); 
-    console.log('Password:', password);
-    console.log('hashPassword:', hashedPassword);
-    console.log('SQL Query', sql);
 
     db.get(sql, [username], (err, row) => {
         if (err) {
@@ -196,30 +192,24 @@ app.get('/logout', (req, res) => {
 
 function checkSession(req, res, next) {
     if (!req.session.username) {
-        console.log('function called')
+        // console.log('function called')
         return res.redirect('/html/index.html');
     }
     next();
 }
 
 app.get('/html/homepage.html', checkSession, (req, res) => {
-    console.log('SESSION INFO', req.session.username);
+    // console.log('SESSION INFO', req.session.username);
     res.sendFile(path.join(__dirname, 'html', 'homepage.html'));
 });
 app.get('/html/homepage-movies.html', checkSession, (req, res) => {
-    console.log('SESSION INFO', req.session.username);
+    // console.log('SESSION INFO', req.session.username);
     res.sendFile(path.join(__dirname, 'html', 'homepage-movies.html'));
 });
 
 
 
-// app.get(['/html/homepage.html', '/html/homepage.html/', '/html/homepage.html/?'], (req, res) => {
-//     console.log('SESSION INFO',req.session.username)
-//     if (!req.session.username) {
-//         return res.redirect('/html/index.html');
-//     }
-//     res.sendFile(path.join(__dirname, 'html', 'homepage.html'));
-// });
+
 
 // Route to get username for display
 app.get('/get-username', (req, res) => {
@@ -260,7 +250,6 @@ app.post('/resetpassword', async (req, res) => {
             // Hash the new password before updating
             const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
             const sql1 = `UPDATE userstable SET password = ? WHERE email = ?`;
-            console.log('SQL Update Statement:', sql1); // Debugging log
 
             db.run(sql1, [hashedPassword, email], (err) => {
                 if (err) {
@@ -304,7 +293,6 @@ app.get('/moviereview', (req, res) => {
             return res.status(404).send('Movie not found');
         }
         res.json(row); // Send the movie details as JSON
-        console.log(row);
     });
 });
 
@@ -321,7 +309,6 @@ app.get('/gamereview', (req, res) => {
             return res.status(404).send('Movie not found');
         }
         res.json(row); // Send the movie details as JSON
-        console.log(row);
     });
 });
 
@@ -333,7 +320,6 @@ app.get('/get-games', (req, res) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        console.log({games: rows});
         res.json({ games: rows });
     });
 });
