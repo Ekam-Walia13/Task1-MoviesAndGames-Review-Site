@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/Pages.css">
+    <!-- <link rel="stylesheet" href="../css/Footer.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>    
+</head>
+<body>
+    <!-- Header with Navbar -->
+    <header>
+        <div class="navbar">
+            <div class="logo">GameFlix</div>
+            <div class="nav-links">
+                <a href="/html/homepage.html">Home</a>
+                <a href="/html/past-reviews.html">Past Reviews</a>
+                <a href="/html/homepage-movies.html">Movies</a>
+                <a href="/html/homepage-games.html">Games</a>
+                <a href="about-us.html">About Us</a>
+            </div>
+            <div class="profile">
+                <h1>Welcome <span id="username">User</span>!</h1>
+                <a href="/logout" class="username">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content of About Us Page -->
+    <main>
+        <section class="about-us">
+            <h1>About Us</h1>
+            <p>Welcome to our website! We are passionate about movies, games, and sharing our reviews and experiences with the world.</p>
+            <p>Our platform allows users to share their thoughts and feedback on their favorite movies and games, connect with others, and discover new titles. Our mission is to create a community where users can feel engaged and informed about the latest trends in entertainment.</p>
+        </section>
+
+        
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Register Service Worker
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(registration => {
+                            console.log('Service Worker registered with scope:', registration.scope);
+                        })
+                        .catch(error => {
+                            console.error('Service Worker registration failed:', error);
+                        });
+                }
+            });
+        </script>
+        
+
+    
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-menu">
+                <li><a href="homepage.html" title="Home">Home</a></li>
+                <li><a href="past-reviews.html" title="Past Reviews">Past Reviews</a></li>
+                <li><a href="homepage-movies.html" title="Movies">Movies</a></li>
+                <li><a href="homepage-games.html" title="Games">Games</a></li>
+                <li><a href="about-us.html" title="About Us">About Us</a></li>
+            </ul>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+                <a href="https://twitter.com/" target="_blank">Twitter</a>
+                <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2024 Your Website Name. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

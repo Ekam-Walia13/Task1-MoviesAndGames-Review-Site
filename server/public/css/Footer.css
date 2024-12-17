@@ -1,0 +1,74 @@
+/* Basic styling for the footer */
+footer {
+    background-color: #3586ff; /* Blue background to match navbar */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Footer navigation links */
+footer .footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-menu li {
+    display: inline;
+    margin: 0 10px;
+}
+
+footer .footer-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+footer .footer-menu li a:hover {
+    color: #f60808; /* Hover effect for links */
+}
+
+/* Footer social media links */
+footer .footer-social a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+footer .footer-social a:hover {
+    color: #f60808; /* Hover effect for social links */
+}
+
+/* Footer copyright text */
+footer .footer-copy {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #f0f0f0; /* Slightly muted text for copyright */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    footer .footer-content {
+        flex-direction: column;
+    }
+
+    footer .footer-menu li {
+        margin: 5px 0;
+    }
+
+    footer .footer-social a {
+        margin: 5px 0;
+    }
+}

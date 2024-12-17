@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background: #3586ff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px; /* Reduced height */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .social_icon li,
+footer .menu li {
+    list-style: none;
+}
+
+footer .social_icon li a {
+    font-size: 2.3em;
+    color: #f60808;
+    display: inline-block;
+    transition: 0.5s;
+    position: relative;
+}
+
+footer .menu {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+footer h3 {
+    color: rgb(44, 225, 16);
+    max-width: 150px;
+}
+
+footer .social_icon {
+    transform: translateY(-50px);
+    max-width: 280px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+footer .menu a {
+    color: #df0a78;
+    text-decoration: none;
+    opacity: 1;
+    padding: 0 10px;
+}
+
+footer p {
+    color: #11b6e4;
+    font-size: 1em;
+    text-align: center;
+}
+
+footer .waves {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 90px; 
+    overflow: hidden;
+    line-height: 0;
+}
+
+footer .wave {
+    position: absolute;
+    width: 200%; 
+    height: 100px; 
+    background: url("../Images/wave.png") repeat-x;
+    background-size: 1000px 100px;
+    animation: animateWave 10s linear infinite;
+}
+
+footer .wave#wave1 {
+    z-index: 1000;
+    opacity: 1;
+    animation-delay: 0s;
+    top: -10px; 
+}
+
+footer .wave#wave2 {
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: 2s;
+    top: -20px; 
+}
+
+footer .wave#wave3 {
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: 4s;
+    top: -30px; 
+}
+
+footer .wave#wave4 {
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: 6s;
+    top: -40px; 
+}
+
+
+@keyframes animateWave {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-1000px);
+    }
+}
+
+
+@media (max-width: 768px) {
+    footer .social_icon {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    footer h3 {
+        font-size: 1.5em;
+    }
+    
+    footer .menu {
+        font-size: 14px;
+    }
+}

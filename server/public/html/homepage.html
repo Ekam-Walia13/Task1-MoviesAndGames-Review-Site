@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/Pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>    
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">GameFlix</div>
+            <div class="nav-links">
+                <a href="/html/homepage.html">Home</a>
+                <a href="/html/past-reviews.html">Past Reviews</a>
+                <a href="/html/homepage-movies.html">Movies</a>
+                <a href="/html/homepage-games.html">Games</a>
+                <a href="about-us.html">About Us</a>
+            </div>
+            <div class="profile">
+                <h1>Welcome <span id="username"></span>!</h1>
+         
+                
+                <a href="/logout" class="username"> <br>Logout </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="trending-section">
+            <h2>Trending Movies</h2>
+            <div class="carousel-container">
+                <button class="carousel-arrow left-arrow" id="movies-left-arrow">&#9664;</button>
+                <div class="carousel" id="movies-carousel">
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/8hP9D6kZseM" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/SkcucKDrbOI" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/KHGHEpUeUwo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/fnXzKwUgDhg" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/_inKs4eeHiI" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/laNiRXqh82Q" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/osvQ1qRSc3s" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/vU3ZqtbIRPI" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/Xu42-p6_5RE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/UaX1rE4ysYU" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/TcMBFSGVi1c" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/NRc-ze7Wrxw" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/hLVjIhPYq7s" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/l6E9Nj2MA0o" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <button class="carousel-arrow right-arrow" id="movies-right-arrow">&#9654;</button>
+            </div>
+        </section>
+        <section class="trending-section">
+            <h2>Trending Games</h2>
+            <div class="carousel-container">
+                <button class="carousel-arrow left-arrow" id="games-left-arrow">&#9664;</button>
+                <div class="carousel" id="games-carousel">
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/iqysmS4lxwQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                     <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/zXztQ77E5o0" frameborder="0" allowfullscreen></iframe>
+                    </div> 
+                     <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/U1qGQqOkZI8" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/-IJuKT1mHO8" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/AKXiKBnzpBQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/K0u_kAWLJOA" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/9fVYKsEmuRo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/Rv7xLt5yNsM" frameborder="0" allowfullscreen></iframe>
+                    </div> 
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/IRNOoOYVn80" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/i3IsLrPeZG8" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/eAvXhNlO-rA" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="trending-item">
+                        <iframe width="200" height="150" src="https://www.youtube.com/embed/Dc5xOGS1oJ0" frameborder="0" allowfullscreen></iframe>
+                    </div> 
+    
+                </div>
+                <button class="carousel-arrow right-arrow" id="games-right-arrow">&#9654;</button>
+            </div>
+        </section>
+
+        <section class="trending-section">
+            <h2>Hot News</h2>
+            <div class="carousel-container">
+                <button class="carousel-arrow left-arrow" id="news-left-arrow">&#9664;</button>
+                <div class="carousel" id="news-carousel">
+                    <div class="trending-item">
+                        <a href="https://www.theguardian.com/commentisfree/2024/nov/30/wicked-would-be-fun-and-forgettable-but-for-the-alt-right-waging-dark-arts-against-it" target="_blank">
+                            <img src="../images/Wickednews.webp" alt="Wicked News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://www.rockpapershotgun.com/marvel-rivals-review" target="_blank">
+                            <img src="../images/MarvelRivalsNews.jpg" alt="Marvel Rivals News Article">
+                        </a>
+                    </div>
+                  
+                    <div class="trending-item">
+                        <a href="https://www.bbc.co.uk/bitesize/articles/zqgmywx" target="_blank">
+                            <img src="../images/movie2.jpg" alt="Wicked News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://www.dualshockers.com/ghost-of-tsushima-all-mythic-tales-ranked/" target="_blank">
+                            <img src="../images/Game2.jpg" alt="Ghost of Tsushima News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://www.msn.com/en-us/movies/news/where-are-the-avengers-i-ve-been-wondering-what-s-going-on-after-endgame-and-captain-america-brave-new-world-s-ep-gives-us-some-hints/ar-AA1vXtkM?ocid=BingNewsVerp" target="_blank">
+                            <img src="../images/movie3.jpg" alt="Wicked News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://mashable.com/article/minecraft-dungeons-announcement-trailer-details" target="_blank">
+                            <img src="../images/game3.jpg" alt="Minecraft Dungeons News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://au.news.yahoo.com/how-to-train-your-dragon-release-date-cast-plot-102258385.html" target="_blank">
+                            <img src="../images/movie 4.jpg" alt="Wicked News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://segmentnext.com/vanguard-multiplayer-best-class-setups/" target="_blank">
+                            <img src="../images/game4.jpg" alt="Call of Duty: Vanguard News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://www.msn.com/en-us/movies/news/read-the-script-for-transformers-one-described-as-stand-by-me-with-robots-in-disguise/ar-AA1vYss1?ocid=BingNewsVerp" target="_blank">
+                            <img src="../images/movie5.jpg" alt="Wicked News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://www.player.one/forza-horizon-4-delisting-leaves-fans-less-day-grab-game-before-its-gone-forever-159409" target="_blank">
+                            <img src="../images/game5.jpg" alt="Forza Horizon 4 News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://www.vg247.com/shrek-5-star-mike-myers-on-the-original-movie-pitch" target="_blank">
+                            <img src="../images/movie6.jpg" alt="Wicked News Article">
+                        </a>
+                    </div>
+                    <div class="trending-item">
+                        <a href="https://segmentnext.com/how-to-get-the-magic-scorpion-charm-in-elden-ring/" target="_blank">
+                            <img src="../images/game6.jpg" alt="Elden Ring News Article">
+                        </a>
+                    </div>
+                </div>
+                <button class="carousel-arrow right-arrow" id="news-right-arrow">&#9654;</button>
+            </div>
+        </section>
+        
+        <section class="trending-section">
+            <h2 style="margin-left: -400px;">Your Certified Favourites</h2>
+            <div class="fan-favourites-table">
+                <table id="fan-favourites-table">
+                    <tr>
+                        <th colspan="2">Top 5 Movies</th>
+                        <th colspan="2">Top 5 Games</th>
+                    </tr>
+                    <!-- Rows will be dynamically inserted here -->
+                </table>
+            </div>
+        </section>
+        
+    
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/get-top-ratings') // Fetch data from the server
+                .then(response => response.json())
+                .then(data => {
+                    const { topMovies, topGames } = data;
+        
+                    const table = document.getElementById('fan-favourites-table');
+        
+                    // Generate rows dynamically
+                    for (let i = 0; i < 5; i++) {
+                        const movie = topMovies[i] || { moviename: 'N/A', rating: 'N/A' };
+                        const game = topGames[i] || { gamename: 'N/A', rating: 'N/A' };
+        
+                        const row = `
+                            <tr>
+                                <td>${movie.moviename}</td>
+                                <td>Rating: ${movie.rating}/5</td>
+                                <td>${game.gamename}</td>
+                                <td>Rating: ${game.rating}/5</td>
+                            </tr>
+                        `;
+                        table.innerHTML += row;
+                    }
+                })
+                .catch(error => console.error('Error fetching top ratings:', error));
+        });
+    </script>
+            
+   
+   
+
+   
+
+    <script>
+        
+            document.addEventListener('DOMContentLoaded', () => {
+                // Register Service Worker
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(registration => {
+                            console.log('Service Worker registered with scope:', registration.scope);
+                        })
+                        .catch(error => {
+                            console.error('Service Worker registration failed:', error);
+                        });
+                }
+            });
+            
+        document.addEventListener('DOMContentLoaded', () => {
+            const createCarousel = (carouselId, leftArrowId, rightArrowId) => {
+                const carousel = document.getElementById(carouselId);
+                const leftArrow = document.getElementById(leftArrowId);
+                const rightArrow = document.getElementById(rightArrowId);
+                let currentIndex = 0;
+
+                const items = carousel.children;
+                const totalItems = items.length;
+                const itemsToShow = 5;
+                const step = 1;
+
+                const updateCarousel = () => {
+                    for (let i = 0; i < totalItems; i++) {
+                        items[i].style.display = 'none';
+                    }
+                    for (let i = currentIndex; i < currentIndex + itemsToShow; i++) {
+                        items[i % totalItems].style.display = 'block';
+                    }
+                };
+
+                leftArrow.addEventListener('click', () => {
+                    currentIndex = (currentIndex - step + totalItems) % totalItems;
+                    updateCarousel();
+                });
+
+                rightArrow.addEventListener('click', () => {
+                    currentIndex = (currentIndex + step) % totalItems;
+                    updateCarousel();
+                });
+
+                updateCarousel();
+            };
+
+            createCarousel('movies-carousel', 'movies-left-arrow', 'movies-right-arrow');
+            createCarousel('games-carousel', 'games-left-arrow', 'games-right-arrow');
+            createCarousel('news-carousel', 'news-left-arrow', 'news-right-arrow');
+            // Fetch and display the username from session
+            fetch('/get-username')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.username) {
+                        // Redirect to index.html if username is null or undefined
+                        window.location.href = '/html/index.html';
+                    } else {
+                        document.getElementById('username').textContent = data.username;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching username:', error);
+                    // Optionally handle the error by redirecting to index.html
+                    window.location.href = '/html/index.html';
+            });
+        });
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-menu">
+                <li><a href="homepage.html" title="Home">Home</a></li>
+                <li><a href="past-reviews.html" title="Past Reviews">Past Reviews</a></li>
+                <li><a href="homepage-movies.html" title="Movies">Movies</a></li>
+                <li><a href="homepage-games.html" title="Games">Games</a></li>
+                <li><a href="about-us.html" title="About Us">About Us</a></li>
+            </ul>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+                <a href="https://twitter.com/" target="_blank">Twitter</a>
+                <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2024 Your Website Name. All Rights Reserved.</p>
+    </footer>
+    
+</body>
+
+
+<!-- <footer>
+    <div class="wave" id="wave1"></div>
+    <div class="wave" id="wave2"></div>
+    <div class="wave" id="wave3"></div>
+    <div class="wave" id="wave4"></div>
+    <ul class="social_icon">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+    </ul>
+    <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+    <p>©2023 Your Website | All Rights Reserved</p>
+</footer> -->
+
+
+
+
+
+
+</html>
+

@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    color: white;
+    margin-right: 20px;
+}
+
+.search-bar {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+}
+
+.nav-links {
+    flex: 3;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.profile {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.username {
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+main {
+    padding: 20px;
+}
+
+.trending-section {
+    text-align: center;
+    margin: 80px 0;
+    margin-bottom: 120px; /* Adjust this value as needed to increase/decrease the space */
+    
+}
+
+
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 80%;
+}
+
+.trending-item {
+    background: green;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;   /* Adjusted width of a movie poster*/
+    height: 150px;  /* Adjusted height of a movie poster */
+    text-align: center;
+    flex-shrink: 0;
+    margin: 0 10px;
+    position: relative;
+}
+
+
+   
+
+.trending-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover; /* Ensures the image covers the entire area without distortion */
+}
+
+
+.carousel-arrow {
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #0072ff;
+    padding: 10px;
+}
+
+.left-arrow {
+    position: absolute;
+    left: -50px;
+    z-index: 1; /* Ensures the arrow is above other elements */
+}
+
+.right-arrow {
+    position: absolute;
+    right: -50px;
+    z-index: 1; /* Ensures the arrow is above other elements */
+}
+
+.h5 {
+    padding: 50px;
+    margin-left: 50%;
+    margin-top: 100px;
+    font-family: 'Alfa Slab One', cursive;
+    color: black;
+    font-size: 20px;
+}
+
+#content {
+    width: 90%;
+    margin: auto;
+    background-color: burlywood;
+    height: 20%;
+    border-style: double;
+    border-width: thick;
+}
+
+.About {
+    text-align: center;
+}
+
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: calc(200px * 5 + 40px); Width for 5 posters + margins */
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.trending-item {
+    flex-shrink: 0;
+    margin: 0 10px;
+    width: 200px;
+    height: 150px;
+    text-align: center;
+}
+
+.carousel-arrow {
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #0072ff;
+    padding: 10px;
+}
+
+.left-arrow {
+    position: absolute;
+    left: 30px;
+}
+
+.right-arrow {
+    position: absolute;
+    right: -10px;
+}
+
+
+
+.fan-favourites-title {
+    display: flex;
+    justify-content: flex-start; /* Aligns the title to the left */
+    margin-bottom: 10px; /* Space between the title and the table */
+    width: 100%; /* Ensure it takes up the full width */
+    padding-left: 50px; /* Optional: Add some padding to the left for better visual spacing */
+}
+
+
+.fan-favourites-table {
+    width: 65%; /* Table takes up three quarters of the page width */
+    margin: 0;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.fan-favourites-table table {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.fan-favourites-table th, .fan-favourites-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.fan-favourites-table th {
+    background-color: #0072ff;
+    color: white;
+}
+
+.fan-favourites-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.fan-favourites-table tr:hover {
+    background-color: #ddd;
+}
+
+.fan-favourites-table td:first-child, .fan-favourites-table td:nth-child(2) {
+    width: 26%; /* Adjusted width for movies and games boxes */
+}
+
+.fan-favourites-table td:nth-child(3), .fan-favourites-table td:last-child {
+    width: 30%; /* Adjusted width for ratings boxes */
+}
+
+
+
+.movie-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+.movie-item {
+    width: calc(20% - 10px); /* 5 items per row with gap */
+    cursor: pointer;
+}
+.movie-item img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+.movie-item img:hover {
+    transform: scale(1.05);
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.modal img {
+    max-width: 100%;
+    height: auto;
+}
+.modal-content {
+    text-align: center;
+}
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}

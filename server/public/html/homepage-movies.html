@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/Pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .movie-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        .movie-item {
+            width: calc(20% - 10px); /* 5 items per row with gap */
+            cursor: pointer;
+        }
+        .movie-item img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .movie-item img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .modal img {
+            max-width: 100%;
+            height: auto;
+        }
+        .modal-content {
+            text-align: center;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">GameFlix</div>
+            <div class="nav-links">
+                <a href="/html/homepage.html">Home</a>
+                <a href="/html/past-reviews.html">Past Reviews</a>
+                <a href="/html/homepage-movies.html">Movies</a>
+                <a href="/html/homepage-games.html">Games</a>
+                <a href="about-us.html">About Us</a>
+            </div>
+            <div class="profile">
+                <h1>Welcome <span id="username"></span>!</h1>
+                <a href="/logout" class="username"> <br>Logout </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>Movies List</h1>
+        <div class="movie-gallery" id="movieGallery"></div>
+    </main>
+
+    <div class="modal" id="movieModal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            }
+    
+            // Fetch and display the username from session
+            fetch('/get-username')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.username) {
+                        // Redirect to index.html if username is null or undefined
+                        window.location.href = '/html/index.html';
+                    } else {
+                        document.getElementById('username').textContent = data.username;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching username:', error);
+                    window.location.href = '/html/index.html';
+                });
+    
+            // Fetch Movie List
+            fetch('/get-movies')
+                .then(response => response.json())
+                .then(data => {
+                    const movieGallery = document.getElementById('movieGallery');
+                    if (movieGallery) {
+                        data.movies.forEach(movie => {
+                            const div = document.createElement('div');
+                            div.className = 'movie-item';
+                            const img = document.createElement('img');
+                            img.src = movie.imagepath;
+                            img.alt = movie.moviename;
+                            img.onerror = () => {
+                                img.src = '/images/Howtotrainyourdragon2.jpg'; // Fallback image path
+                            };
+                            img.addEventListener('click', () => {
+                                fetch(`/moviereview?moviename=${encodeURIComponent(movie.moviename)}`)
+                                    .then(response => response.json())
+                                    .then(movieData => {
+                                        const modalContent = document.getElementById('modalContent');
+                                        modalContent.innerHTML = `
+                                            <h3>${movieData.moviename}</h3>
+                                            <p><strong>Release Year:</strong> ${movieData.releaseyear}</p>
+                                            <p><strong>Length:</strong> ${movieData.movielenght} minutes</p>
+                                            <div style="display: flex; align-items: flex-start;">
+                                                <img src="${movieData.imagepath}" alt="${movieData.moviename}" onerror="this.src='/images/Interstellar.jpg';" style="margin-right: 20px;">
+                                                <div>
+                                                    <p><strong>Plot</strong><br>${movieData.plot}</p>
+                                                </div>
+                                            </div>
+                                            <form id="reviewForm">
+                                                <label for="userReview">Your Review (max 500 characters):</label><br>
+                                                <textarea id="userReview" name="userReview" maxlength="500" required style="width: 70%; height: 50px;"></textarea><br>
+                                                <label for="rating">Rating:</label>
+                                                <select id="rating" name="rating" required>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select><br>
+                                                <button type="submit">Submit</button>
+                                            </form>
+                                        `;
+                                        document.getElementById('movieModal').style.display = 'block';
+    
+                                        // Add event listener for form submission
+                                        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+                                            event.preventDefault();
+                                            const userReview = document.getElementById('userReview').value;
+                                            const rating = document.getElementById('rating').value;
+                                            const username = document.getElementById('username').textContent;
+                                            const moviename = movieData.moviename;
+                                            const date = new Date().toISOString();
+    
+                                            fetch('/user_review', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({
+                                                    username: username,
+                                                    moviename: moviename,
+                                                    userreview: userReview,
+                                                    date: date,
+                                                    rating: rating
+                                                })
+                                            })
+                                            .then(response => response.json())   
+                                            .then(data => {
+                                                document.getElementById('movieModal').style.display = 'none';
+                                                alert('Thanks for your Review!');
+                                            })
+                                            .catch((error) => {
+                                                console.error('Error:', error);
+                                                alert('There was an error submitting your review. Please try again.');
+                                            });
+                                        });
+                                    })
+                                    .catch(error => console.error('Error fetching movie details:', error));
+                            });
+                            div.appendChild(img);
+                            movieGallery.appendChild(div);
+                        });
+                    } else {
+                        console.error('Element with id "movieGallery" not found.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching movies list:', error);
+                    window.location.href = '/html/index.html';
+                });
+    
+            // Close modal
+            document.getElementById('modalClose').addEventListener('click', () => {
+                document.getElementById('movieModal').style.display = 'none';
+            });
+        });
+    </script>
+    
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-menu">
+                <li><a href="homepage.html" title="Home">Home</a></li>
+                <li><a href="past-reviews.html" title="Past Reviews">Past Reviews</a></li>
+                <li><a href="homepage-movies.html" title="Movies">Movies</a></li>
+                <li><a href="homepage-games.html" title="Games">Games</a></li>
+                <li><a href="about-us.html" title="About Us">About Us</a></li>
+            </ul>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+                <a href="https://twitter.com/" target="_blank">Twitter</a>
+                <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2024 Your Website Name. All Rights Reserved.</p>
+    </footer>
+  
+
+  
+</body>
+
+
+
+
+</html>

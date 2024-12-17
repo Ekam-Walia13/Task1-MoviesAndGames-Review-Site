@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/Pages.css">
+    <!-- <link rel="stylesheet" href="../css/Footer.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>    
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">GameFlix</div>
+            <div class="nav-links">
+                <a href="/html/homepage.html">Home</a>
+                <a href="/html/past-reviews.html">Past Reviews</a>
+                <a href="/html/homepage-movies.html">Movies</a>
+                <a href="/html/homepage-games.html">Games</a>
+                <a href="about-us.html">About Us</a>
+            </div>
+            <div class="profile">
+                <h1>Welcome <span id="username"></span>!</h1>
+                <!-- <h2>User</h2> -->
+                <!-- <div class="username" id="username"></div> -->
+                
+                <a href="/logout" class="username"> <br>Logout </a>
+            </div>
+        </div>
+    </header>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Reviews</title>
+</head>
+<body>
+    <h1>Movie Reviews</h1>
+    <table border="1" id="user-reviews-table">
+        <tr>
+            <th>Username</th>
+            <th>Movie Name</th>
+            <th>Review Date</th>
+            <th>Comments</th>
+            <th>Rating</th>
+        </tr>
+    </table>
+
+    <h1>Game Reviews</h1>
+    <table border="1" id="game-reviews-table">
+        <tr>
+            <th>Username</th>
+            <th>Game Name</th>
+            <th>Review Date</th>
+            <th>Comments</th>
+            <th>Rating</th>
+        </tr>
+    </table>
+
+    <script>
+        // Register Service Worker (optional part you had in your original code)
+        document.addEventListener('DOMContentLoaded', () => {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            }
+        });
+
+        // Format Date Function
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const year = date.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
+
+        // Fetch the reviews from the backend
+        fetch('/past-reviews')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch reviews');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the case where there are no reviews
+                if (data.userReviews.length === 0 && data.gameReviews.length === 0) {
+                    alert('No reviews found. Start reviewing!');
+                }
+
+                // Populate the movie reviews table
+                const userReviewsTable = document.getElementById('user-reviews-table');
+                data.userReviews.forEach(review => {
+                    const row = userReviewsTable.insertRow();
+                    row.insertCell(0).innerText = review.username;  // Username from backend
+                    row.insertCell(1).innerText = review.moviename;
+                    row.insertCell(2).innerText = formatDate(review.reviewdate);
+                    row.insertCell(3).innerText = review.comments;
+                    row.insertCell(4).innerText = review.rating;
+                });
+
+                // Populate the game reviews table
+                const gameReviewsTable = document.getElementById('game-reviews-table');
+                data.gameReviews.forEach(review => {
+                    const row = gameReviewsTable.insertRow();
+                    row.insertCell(0).innerText = review.username;  // Username from backend
+                    row.insertCell(1).innerText = review.gamename;  // Game Name
+                    row.insertCell(2).innerText = formatDate(review.reviewdate); // Review Date
+                    row.insertCell(3).innerText = review.comments;  // Comments
+                    row.insertCell(4).innerText = review.rating;    // Rating
+                });
+            })
+            .catch(error => console.error('Error fetching reviews:', error));
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-menu">
+                <li><a href="homepage.html" title="Home">Home</a></li>
+                <li><a href="past-reviews.html" title="Past Reviews">Past Reviews</a></li>
+                <li><a href="homepage-movies.html" title="Movies">Movies</a></li>
+                <li><a href="homepage-games.html" title="Games">Games</a></li>
+                <li><a href="about-us.html" title="About Us">About Us</a></li>
+            </ul>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+                <a href="https://twitter.com/" target="_blank">Twitter</a>
+                <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2024 Your Website Name. All Rights Reserved.</p>
+    </footer>
+    
+
+</body>
+</html>
+
+

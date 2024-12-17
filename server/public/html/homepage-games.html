@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Review</title>
+    <link rel="stylesheet" href="../css/Pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .game-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        .game-item {
+            width: calc(20% - 10px);
+            cursor: pointer;
+        }
+        .game-item img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .game-item img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .modal img {
+            max-width: 100%;
+            height: auto;
+        }
+        .modal-content {
+            text-align: center;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">GameFlix</div>
+            <div class="nav-links">
+                <a href="/html/homepage.html">Home</a>
+                <a href="/html/past-reviews.html">Past Reviews</a>
+                <a href="/html/homepage-movies.html">Movies</a>
+                <a href="/html/homepage-games.html">Games</a>
+                <a href="about-us.html">About Us</a>
+            </div>
+            <div class="profile">
+                <h1>Welcome <span id="username"></span>!</h1>
+                <a href="/logout" class="username"> <br>Logout </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>Games List</h1>
+        <div class="game-gallery" id="gameGallery"></div>
+    </main>
+
+    <div class="modal" id="gameModal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            }
+    
+            // Fetch and display the username from session
+            fetch('/get-username')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.username) {
+                        window.location.href = '/html/index.html';
+                    } else {
+                        document.getElementById('username').textContent = data.username;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching username:', error);
+                    window.location.href = '/html/index.html';
+                });
+    
+            // Fetch Game List
+            fetch('/get-games')
+                .then(response => response.json())
+                .then(data => {
+                    const gameGallery = document.getElementById('gameGallery');
+                    if (gameGallery) {
+                        data.games.forEach(game => {
+                            const div = document.createElement('div');
+                            div.className = 'game-item';
+                            const img = document.createElement('img');
+                            img.src = game.imagepath;
+                            img.alt = game.gamename;
+                            img.onerror = () => {
+                                img.src = '/Images/Interstellar.jpg';
+                            };
+                            img.addEventListener('click', () => {
+                                fetch(`/gamereview?gamename=${encodeURIComponent(game.gamename)}`)
+                                    .then(response => response.json())
+                                    .then(gameData => {
+                                        const modalContent = document.getElementById('modalContent');
+                                        modalContent.innerHTML = `
+                                            <h3>${gameData.gamename}</h3>
+                                            <p><strong>Release Year:</strong> ${gameData.releaseyear}</p>
+                                            <p><strong>Age Rating:</strong> ${gameData.agerating}</p>
+                                            <div style="display: flex; align-items: flex-start;">
+                                                <img src="${gameData.imagepath}" alt="${gameData.gamename}" onerror="this.src='/images/Interstellar.jpg';" style="margin-right: 20px;">
+                                                <div>
+                                                    <p><strong>Storyline</strong><br>${gameData.storyline}</p>
+                                                </div>
+                                            </div>
+                                            <form id="reviewForm">
+                                                <label for="userReview">Your Review (max 500 characters):</label><br>
+                                                <textarea id="userReview" name="userReview" maxlength="500" required style="width: 70%; height: 50px;"></textarea><br>
+                                                <label for="rating">Rating:</label>
+                                                <select id="rating" name="rating" required>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select><br>
+                                                <button type="submit">Submit</button>
+                                            </form>
+                                        `;
+                                        document.getElementById('gameModal').style.display = 'block';
+    
+                                        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+                                            event.preventDefault();
+                                            const userReview = document.getElementById('userReview').value;
+                                            const rating = document.getElementById('rating').value;
+                                            const username = document.getElementById('username').textContent;
+                                            const gamename = gameData.gamename;
+                                            const date = new Date().toISOString();
+    
+                                            fetch('/games-review', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({
+                                                    username: username,
+                                                    gamename: gamename,
+                                                    date: date,
+                                                    userreview: userReview,
+                                                    rating: rating
+                                                })
+                                            })
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                document.getElementById('gameModal').style.display = 'none';
+                                                alert('Thanks for your Review!');
+                                            })
+                                            .catch((error) => {
+                                                console.error('Error:', error);
+                                                alert('There was an error submitting your review. Please try again.');
+                                            });
+                                        });
+                                    })
+                                    .catch(error => console.error('Error fetching game details:', error));
+                            });
+                            div.appendChild(img);
+                            gameGallery.appendChild(div);
+                        });
+                    } else {
+                        console.error('Element with id "gameGallery" not found.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching games list:', error);
+                    window.location.href = '/html/index.html';
+                });
+    
+            // Close modal
+            document.getElementById('modalClose').addEventListener('click', () => {
+                document.getElementById('gameModal').style.display = 'none';
+            });
+        });
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-menu">
+                <li><a href="homepage.html" title="Home">Home</a></li>
+                <li><a href="past-reviews.html" title="Past Reviews">Past Reviews</a></li>
+                <li><a href="homepage-movies.html" title="Movies">Movies</a></li>
+                <li><a href="homepage-games.html" title="Games">Games</a></li>
+                <li><a href="about-us.html" title="About Us">About Us</a></li>
+            </ul>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+                <a href="https://twitter.com/" target="_blank">Twitter</a>
+                <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2024 Your Website Name. All Rights Reserved.</p>
+    </footer>
+    
+</body>
+
+
+
+</html>
